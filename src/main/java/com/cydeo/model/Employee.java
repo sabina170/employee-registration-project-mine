@@ -3,6 +3,10 @@ package com.cydeo.model;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Getter
@@ -12,11 +16,25 @@ import java.time.LocalDate;
 @ToString
 public class Employee {
 
+//    @NotNull  ----> field/variable shouldn't be null
+//    @NotEmpty  ----> field/variable shouldn't be ""     |   "" - this is empty string, and doesn't null string  |
+//    @NotBlank  -----> field/variable shouldn't be "   "     |  "    " - this is blank string (no letter, has only spaces)
+
+    //@NotNull -> @NotNull
+    //@NotEmpty -> @NotNull + @NotEmpty
+    //@NotBlank -> @NotNull  + @NotEmpty + @NotBlank
+
+    @NotBlank
+    @Size(max=12, min=2)
     private String firstName;
+
+
     private String lastName;
+
     //Thymeleaf accepts yyyy-MM-dd, but Local Date accepts mm-dd-yyyy (yyyy-mm-dd)
    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate birthday;
+
     private String email;
     private String password;
     private String address;
